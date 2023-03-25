@@ -17,8 +17,8 @@ plugins {
 }
 
 base {
-    archivesName.set(mod_id)
-    group = "dev.compactmods"
+    archivesName.set("core-api")
+    group = "dev.compactmods.compactcrafting"
     version = modVersion
 }
 
@@ -86,13 +86,7 @@ artifacts {
 val PACKAGES_URL = System.getenv("GH_PKG_URL") ?: "https://maven.pkg.github.com/compactmods/compactcrafting-core"
 publishing {
     publications.register<MavenPublication>("api") {
-        artifactId = "compactmachines"
-        groupId = "dev.compactmods"
-
-        artifacts {
-            artifact(tasks.jar.get())
-            artifact(tasks.named("sourcesJar").get())
-        }
+        from(components.getByName("java"))
     }
 
     repositories {
