@@ -2,13 +2,9 @@ import net.minecraftforge.gradle.userdev.UserDevExtension
 import java.text.SimpleDateFormat
 import java.util.*
 
-var semver: String = System.getenv("CC_SEMVER_VERSION") ?: "9.9.9"
-if(semver.startsWith("v"))
-    semver = semver.trimStart('v');
-
-val buildNumber: String = System.getenv("CC_BUILD_NUM") ?: "0"
-val nightlyVersion: String = "${semver}.${buildNumber}-nightly"
-val isRelease: Boolean = (System.getenv("CC_RELEASE") ?: "false").equals("true", true)
+var modVersion: String = System.getenv("CC_VERSION") ?: "9.9.9"
+if(modVersion.startsWith("v"))
+    modVersion = modVersion.trimStart('v');
 
 var mod_id: String by extra
 
@@ -23,7 +19,7 @@ plugins {
 base {
     archivesName.set(mod_id)
     group = "dev.compactmods"
-    version = if (isRelease) semver else nightlyVersion
+    version = modVersion
 }
 
 java {
@@ -51,7 +47,6 @@ sourceSets.named("test") {
 
 configure<UserDevExtension> {
     mappings("parchment", "${parchment_version}-${minecraft_version}")
-    accessTransformer(file("../forge-main/src/main/resources/META-INF/accesstransformer.cfg"))
 }
 
 dependencies {
@@ -88,9 +83,9 @@ artifacts {
     archives(tasks.named("sourcesJar").get())
 }
 
-val PACKAGES_URL = System.getenv("GH_PKG_URL") ?: "https://maven.pkg.github.com/compactmods/compactcrafting"
+val PACKAGES_URL = System.getenv("GH_PKG_URL") ?: "https://maven.pkg.github.com/compactmods/compactcrafting-core"
 publishing {
-    publications.register<MavenPublication>("releaseApi") {
+    publications.register<MavenPublication>("api") {
         artifactId = "compactmachines"
         groupId = "dev.compactmods"
 
