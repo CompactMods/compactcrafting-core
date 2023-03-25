@@ -6,10 +6,6 @@ env:
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
-    tags-ignore:
-      - v*
     paths-ignore:
       - "README.md"
       - "LICENSE"

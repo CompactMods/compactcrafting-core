@@ -17,7 +17,6 @@ plugins {
 }
 
 base {
-    archivesName.set("core-api")
     group = "dev.compactmods.compactcrafting"
     version = modVersion
 }
