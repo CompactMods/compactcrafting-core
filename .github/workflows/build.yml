@@ -1,0 +1,57 @@
+name: Build and Publish
+
+env:
+  GH_PKG_URL: "https://maven.pkg.github.com/${{ github.repository }}"
+
+on:
+  workflow_dispatch:
+  push:
+    paths-ignore:
+      - "README.md"
+      - "LICENSE"
+      - ".github/**/*"
+
+jobs:
+  vars:
+    name: Get Variables
+    runs-on: ubuntu-22.04
+    outputs:
+      version: ${{steps.version.outputs.version }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Version
+        id: version
+        uses: paulhatch/semantic-version@v5.0.2
+        with:
+          bump_each_commit: true
+
+  publish:
+    name: Publish
+    runs-on: ubuntu-22.04
+    needs: [ vars ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: "17"
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: publish
+        env:
+          CC_VERSION: ${{ needs.vars.outputs.version }}
+          GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
