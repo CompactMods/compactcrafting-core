@@ -79,7 +79,7 @@ val PACKAGES_URL = System.getenv("GH_PKG_URL") ?: "https://maven.pkg.github.com/
 publishing {
     publications.register<MavenPublication>("api") {
         artifactId = "core-api"
-        groupId = "dev.compactmods"
+        from(components.getByName("java"))
 
         artifacts {
             artifact(tasks.jar.get())
