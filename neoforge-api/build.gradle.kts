@@ -18,7 +18,6 @@ var mod_id: String by extra
 val isRelease: Boolean = (System.getenv("CC_RELEASE") ?: "false").equals("true", true)
 
 var neoforge_version: String by extra
-// var parchment_version: String by extra
 
 base {
     archivesName.set(mod_id)
@@ -45,11 +44,6 @@ sourceSets.named("test") {
     }
 }
 
-//configure<UserDevExtension> {
-//    mappings("parchment", parchment_version)
-//    accessTransformer(file("../forge-main/src/main/resources/META-INF/accesstransformer.cfg"))
-//}
-
 dependencies {
     implementation("net.neoforged:neoforge:${neoforge_version}")
 }
@@ -71,7 +65,6 @@ tasks.withType<Jar> {
 
 tasks.jar {
     archiveClassifier.set("api")
-    finalizedBy("reobfJar")
 }
 
 tasks.named<Jar>("sourcesJar") {
