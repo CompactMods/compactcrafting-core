@@ -58,7 +58,7 @@ public interface IRecipeBlocks {
 
     default IRecipeBlocks normalize() {
         AABB sb = getSourceBounds();
-        BlockPos offset = new BlockPos(-sb.minX, -sb.minY, -sb.minZ);
+        BlockPos offset = BlockPos.containing(-sb.minX, -sb.minY, -sb.minZ);
         return offset(offset);
     }
 }

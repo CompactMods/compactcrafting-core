@@ -10,8 +10,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.common.util.INBTSerializable;
-import net.minecraftforge.common.util.LazyOptional;
+import net.neoforged.neoforge.common.util.INBTSerializable;
 
 public interface IMiniaturizationField extends INBTSerializable<Tag> {
 
@@ -53,8 +52,6 @@ public interface IMiniaturizationField extends INBTSerializable<Tag> {
 
     void setLevel(Level level);
 
-    void registerListener(LazyOptional<IFieldListener> listener);
-
     default CompoundTag serverData() {
         return new CompoundTag();
     }
@@ -94,9 +91,6 @@ public interface IMiniaturizationField extends INBTSerializable<Tag> {
     void setRecipe(ResourceLocation id);
 
     default void handleDestabilize() {}
-
-    LazyOptional<IMiniaturizationField> getRef();
-    void setRef(LazyOptional<IMiniaturizationField> ref);
 
     void enable();
     void disable();

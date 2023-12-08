@@ -1,14 +1,14 @@
-import net.minecraftforge.gradle.userdev.UserDevExtension
 import java.text.SimpleDateFormat
 import java.util.*
 
 plugins {
-    id("idea")
+    id("java-library")
     id("eclipse")
+    id("idea")
     id("maven-publish")
-    id("net.minecraftforge.gradle") version ("5.1.+")
-    id("org.parchmentmc.librarian.forgegradle") version ("1.+")
+    id("net.neoforged.gradle.userdev") version("7.0.57")
 }
+
 
 var envVersion: String = System.getenv("CC_VERSION") ?: "9.9.9"
 if(envVersion.startsWith("v"))
@@ -17,9 +17,8 @@ if(envVersion.startsWith("v"))
 var mod_id: String by extra
 val isRelease: Boolean = (System.getenv("CC_RELEASE") ?: "false").equals("true", true)
 
-var minecraft_version: String by extra
-var forge_version: String by extra
-var parchment_version: String by extra
+var neoforge_version: String by extra
+// var parchment_version: String by extra
 
 base {
     archivesName.set(mod_id)
@@ -46,13 +45,13 @@ sourceSets.named("test") {
     }
 }
 
-configure<UserDevExtension> {
-    mappings("parchment", parchment_version)
-    accessTransformer(file("../forge-main/src/main/resources/META-INF/accesstransformer.cfg"))
-}
+//configure<UserDevExtension> {
+//    mappings("parchment", parchment_version)
+//    accessTransformer(file("../forge-main/src/main/resources/META-INF/accesstransformer.cfg"))
+//}
 
 dependencies {
-    minecraft ("net.minecraftforge", "forge", version = "${minecraft_version}-${forge_version}")
+    implementation("net.neoforged:neoforge:${neoforge_version}")
 }
 
 tasks.withType<Jar> {

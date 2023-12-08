@@ -7,8 +7,7 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.util.INBTSerializable;
-import net.minecraftforge.common.util.LazyOptional;
+import net.neoforged.neoforge.common.util.INBTSerializable;
 
 public interface IActiveWorldFields extends INBTSerializable<ListTag> {
 
@@ -29,8 +28,6 @@ public interface IActiveWorldFields extends INBTSerializable<ListTag> {
     void unregisterField(IMiniaturizationField field);
 
     Optional<IMiniaturizationField> get(BlockPos center);
-
-    LazyOptional<IMiniaturizationField> getLazy(BlockPos center);
 
     boolean hasActiveField(BlockPos center);
 

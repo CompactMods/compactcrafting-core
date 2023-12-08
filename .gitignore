@@ -1,6 +1,37 @@
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
 
-forge-api/build/
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
 
-.idea/
+# gradle
+build
+.gradle
 
-.gradle/
+# other
+eclipse
+run
+
+# Files from Forge MDK
+forge*changelog.txt
+
+logs/
+
+# MC Server Files
+saves/
+config/
+.mixin.out/
+options.txt
+usercache.json
+usernamecache.json
+
+*.lnk
