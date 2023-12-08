@@ -20,7 +20,7 @@ val isRelease: Boolean = (System.getenv("CC_RELEASE") ?: "false").equals("true",
 var neoforge_version: String by extra
 
 base {
-    archivesName.set(mod_id)
+    archivesName.set("$mod_id-api")
     group = "dev.compactmods"
     version = envVersion
 }
@@ -76,10 +76,10 @@ artifacts {
     archives(tasks.named("sourcesJar").get())
 }
 
-val PACKAGES_URL = System.getenv("GH_PKG_URL") ?: "https://maven.pkg.github.com/compactmods/compactcrafting"
+val PACKAGES_URL = System.getenv("GH_PKG_URL") ?: "https://maven.pkg.github.com/compactmods/compactcrafting-core"
 publishing {
-    publications.register<MavenPublication>("releaseApi") {
-        artifactId = mod_id
+    publications.register<MavenPublication>("api") {
+        artifactId = "core-api"
         groupId = "dev.compactmods"
 
         artifacts {
