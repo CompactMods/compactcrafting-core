@@ -70,21 +70,11 @@ tasks.named<Jar>("sourcesJar") {
     archiveClassifier.set("api-sources")
 }
 
-artifacts {
-    archives(tasks.jar.get())
-    archives(tasks.named("sourcesJar").get())
-}
-
 val PACKAGES_URL = System.getenv("GH_PKG_URL") ?: "https://maven.pkg.github.com/compactmods/compactcrafting-core"
 publishing {
     publications.register<MavenPublication>("api") {
         artifactId = "core-api"
         from(components.getByName("java"))
-
-        artifacts {
-            artifact(tasks.jar.get())
-            artifact(tasks.named("sourcesJar").get())
-        }
     }
 
     repositories {
