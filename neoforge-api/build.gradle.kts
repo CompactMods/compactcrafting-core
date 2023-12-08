@@ -63,11 +63,10 @@ tasks.withType<Jar> {
 }
 
 tasks.jar {
-    archiveClassifier.set("api")
 }
 
 tasks.named<Jar>("sourcesJar") {
-    archiveClassifier.set("api-sources")
+    archiveClassifier.set("sources")
 }
 
 val PACKAGES_URL = System.getenv("GH_PKG_URL") ?: "https://maven.pkg.github.com/compactmods/compactcrafting-core"
