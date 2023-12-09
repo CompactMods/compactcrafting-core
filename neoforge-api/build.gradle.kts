@@ -57,7 +57,8 @@ tasks.withType<Jar> {
                 "Implementation-Title" to "Compact Crafting API",
                 "Implementation-Version" to archiveVersion,
                 "Implementation-Vendor" to "",
-                "Implementation-Timestamp" to now
+                "Implementation-Timestamp" to now,
+                "FMLModType" to "GAMELIBRARY"
         ))
     }
 }
